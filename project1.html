@@ -5,9 +5,138 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    
-</head>
-<body>
-    
+    <style>
+
+        .moving 
+        {
+            position: absolute;
+            max-width: 1300px;
+            animation:
+            <?php
+            if (isset($_GET['Do'])) {
+                $cmd = $_GET['Do'];
+                if ($cmd == "D"){
+                    echo "myforward";
+                } else if ($cmd == "R"){
+                    echo "mybackward";
+                }
+            }
+            ?>
+            3s;
+            overflow: hidden;
+        }
+
+        @keyframes myforward
+        {
+        0%   {right: 170px;}
+        30%  {right: -420px;}
+        60%   {left: -670px;}
+        100%  {left: 740px;}
+        }
+
+        @keyframes mybackward
+        {
+        0%   {right: 170px;}
+        50%  {right: 1900px;}
+        60%   {left: 1800px;}
+        100%  {left: 730px;}
+        }
+
+    </style>
+      
+    </head>
+    <body>
+        <div id=Car class="moving" style="
+        position: absolute;
+        top: 100px;
+        right: 170px;">
+        <img src="image/carOff.jpg" alt="carOff" style="width: 470px; height: 300px;">
+        </div>
+        
+        <div id="form" style="
+                        position: absolute;
+                        top: 100px;
+                        left: 150px;
+                        width: 180px;">
+            <form action="Car2.php" method="GET"> 
+                                            <h3><u>Command:</u></h3>
+                                            K in = key In 
+                                            <br>On = ingnition On 
+                                            <br> D = forward 
+                                            <br> R = backward
+                                            <br> Off = ingnition Off 
+                                            <br> K out = key Out
+                                            <br>
+                                            <br>
+                                            <input type="text" name="Do" style="
+                                                                            position: relative; 
+                                                                            margin-top: 10px; 
+                                                                            left: -5px;
+                                                                            width: 290px; 
+                                                                            height:35px; 
+                                                                            font-size: 20px">
+                                            <input type="submit" name="Search" value="SEND" style="
+                                                                                            position: relative; 
+                                                                                            top: 40px; 
+                                                                                            left: -10px; 
+                                                                                            width: 300px;
+                                                                                            height: 30px; 
+                                                                                            font-size: 20px">
+            </form>
+        </div>
+        
+            <?php
+                class Car {
+                    public function KeyIn(){
+                        echo '<audio id="audio" autoplay>
+                        <source src="soundEfect/keysIn.mp3" type="audio/mp3" />
+                    </audio>';
+                    }
+
+                    public function machine_turn_On(){
+                        echo '<audio id="audio" autoplay>
+                        <source src="soundEfect/ingnitionOn.mp3" type="audio/mp3" />
+                        </audio>';
+                        echo '<img src="image/carOn.jpg" alt="carOn" style="
+                                                                        position: absolute; 
+                                                                        top: 100px;
+                                                                        right: 170px;
+                                                                        width: 470px; 
+                                                                        height: 300px;">';
+                    }
+
+                    public function machine_turn_Off(){
+                        echo '<audio id="audio" autoplay>
+                        <source src="soundEfect/ingnitionOff.mp3" type="audio/mp3" />
+                        </audio>';
+                        return $machine = "off";
+                    }
+
+                    public function KeyOut(){
+                        echo '<audio id="audio" autoplay>
+                        <source src="soundEfect/keysOut.mp3" type="audio/mp3" />
+                    </audio>';
+                    }
+                }
+                
+///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\///\\\
+//--------------------------------------------------------\\
+
+                $newCar = new Car();
+                if (isset($_GET['Do'])){
+                    $Do = $_GET['Do'];{
+                        switch (strtolower($Do)) {
+                            case "k in": $newCar->KeyIn(); break;
+                            case "on": $newCar->machine_turn_On(); break;
+                            case "off": $newCar->machine_turn_Off(); break;
+                            case "k out": $newCar->KeyOut(); break;
+                        }
+                    }
+                }
+            ?>
+
+            <?php
+             
+            ?>
 </body>
 </html>
