@@ -5,44 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Page Title</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <style>
-
-        .moving 
-        {
-            position: absolute;
-            max-width: 1300px;
-            animation:
-            <?php
-            if (isset($_GET['Do'])) {
-                $cmd = $_GET['Do'];
-                if ($cmd == "D"){
-                    echo "myforward";
-                } else if ($cmd == "R"){
-                    echo "mybackward";
-                }
-            }
-            ?>
-            3s;
-            overflow: hidden;
-        }
-
-        @keyframes myforward
-        {
-        0%   {right: 170px;}
-        30%  {right: -420px;}
-        60%   {left: -670px;}
-        100%  {left: 740px;}
-        }
-
-        @keyframes mybackward
-        {
-        0%   {right: 170px;}
-        50%  {right: 1900px;}
-        60%   {left: 1800px;}
-        100%  {left: 730px;}
-        }
-
-    </style>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
       
     </head>
     <body>
